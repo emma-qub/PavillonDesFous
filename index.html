@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>New article</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="Bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="FontAwsome/font-awesome-4.2.0/css/font-awesome.min.css">
+
+    <!-- AngularJS -->
+    <script type="text/javascript" src="AngularJS/angular-1.2.26/angular.min.js"></script>
+    <script type="text/javascript" src="AngularJS/angular-1.2.26/angular-sanitize.min.js"></script>
+
+    <!-- My app -->
+    <script type="text/javascript" src="app.js"></script>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- Color Picker -->
+    <link rel="stylesheet" type="text/css" href="AngularJS/angular-colorpicker/css/colorpicker.css">
+    <script type="text/javascript" src="AngularJS/angular-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+
+    <!-- AngularUI Bootstrap -->
+    <script type="text/javascript" src="AngularJS/angular-ui/ui-bootstrap-tpls-0.11.2.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-app="app">
+
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="content" ng-controller="FormatController">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1" style="border: solid 2px grey;">
+          <div ng-bind-html="format(article)"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+          <div class="col-lg-12" style="padding: 0px;">
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('left')" popover="Align left">
+              <i class="fa fa-align-left"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('center')" popover="Align center">
+              <i class="fa fa-align-center"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('right')" popover="Align right">
+              <i class="fa fa-align-right"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('justify')" popover="Align justify">
+              <i class="fa fa-align-justify"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('b')" popover="Bold">
+              <i class="fa fa-bold"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('i')" popover="Italic">
+              <i class="fa fa-italic"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('s')" popover="Strike">
+              <i class="fa fa-strikethrough"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('u')" popover="Underline">
+              <i class="fa fa-underline"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('img')" popover="Image">
+              <i class="fa fa-image"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('url')" popover="Link">
+                <i class="fa fa-link"></i>
+              </button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href ng-click="setUPickedAndClick('1')">
+                    [url]htp://www.site.com[/url]
+                    <i ng-show="upicked === '1'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setUPickedAndClick('2')">
+                    [url=htp://www.site.com]Site[/url]
+                    <i ng-show="upicked === '2'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('font')" popover="Font">
+                <i class="fa fa-font"></i>
+              </button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href ng-click="setFPickedAndClick('Arial')">
+                    Arial <span style="font-family: 'Arial';">Texte</span>
+                    <i ng-show="fpicked === 'Arial'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setFPickedAndClick('Cambria')">
+                    Cambria <span style="font-family: 'Cambria';">Texte</span>
+                    <i ng-show="fpicked === 'Cambria'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setFPickedAndClick('Courrier')">
+                    Courrier <span style="font-family: 'Courrier';">Texte</span>
+                    <i ng-show="fpicked === 'Courrier'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setFPickedAndClick('DejaVu Sans')">
+                    DejaVu Sans <span style="font-family: 'DejaVu Sans';">Texte</span>
+                    <i ng-show="fpicked === 'DejaVu Sans'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setFPickedAndClick('DejaVu Serif')">
+                    DejaVu Serif <span style="font-family: 'DejaVu Serif';">Texte</span>
+                    <i ng-show="fpicked === 'DejaVu Serif'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setFPickedAndClick('Tahoma')">
+                    Tahoma <span style="font-family: 'Tahoma';">Texte</span>
+                    <i ng-show="fpicked === 'Tahoma'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setFPickedAndClick('Times New Roman')">
+                    Times New Roman <span style="font-family: 'Times New Roman';">Texte</span>
+                    <i ng-show="fpicked === 'Times New Roman'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setFPickedAndClick('Verdana')">
+                    Verdana <span style="font-family: 'Verdana';">Texte</span>
+                    <i ng-show="fpicked === 'Verdana'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('title')" popover="Header">
+                <i class="fa fa-header"></i><span style="font-weight: bold; margin-left: 3px;">{{hpicked}}</span>
+              </button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href ng-click="setHPickedAndClick('1')">
+                    Header 1
+                    <i ng-show="hpicked === '1'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setHPickedAndClick('2')">
+                    Header 2
+                    <i ng-show="hpicked === '2'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setHPickedAndClick('3')">
+                    Header 3
+                    <i ng-show="hpicked === '3'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setHPickedAndClick('4')">
+                    Header 4
+                    <i ng-show="hpicked === '4'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setHPickedAndClick('5')">
+                    Header 5
+                    <i ng-show="hpicked === '5'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href ng-click="setHPickedAndClick('6')">
+                    Header 6
+                    <i ng-show="hpicked === '6'" class="fa fa-check success"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('color')" popover="Color" style="color: {{cpicked}};">
+                <i class="fa fa-paint-brush"></i>
+              </button>
+              <button type="button" class="btn btn-default dropdown-toggle" ng-model="cpicked" colorpicker colorpicker-position="bottom">
+                <i class="fa fa-caret-down"></i>
+              </button>
+            </div>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('quote')" popover="Quote">
+              <i class="fa fa-quote-right"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('sup')" popover="Sup">
+              <i class="fa fa-superscript"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('sub')" popover="Sub">
+              <i class="fa fa-subscript"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('hr')" popover="Line">
+              <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('spoiler')" popover="Spoiler block">
+              <i class="fa fa-eye-slash"></i>
+            </button>
+            <button type="button" class="btn btn-default" popover-placement="bottom" popover-trigger="mouseenter" popover-popup-delay="500" ng-click="addTagSel('abbr')" popover="Abbreviation">
+              <i class="fa fa-book"></i>
+            </button>
+          </div>
+          <textarea id="editor" cols="160" rows="15" ng-model="article"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="Bootstrap/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
