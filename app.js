@@ -22,7 +22,7 @@ app.controller('FormatController', function ($scope, $sce) {
     var formated = $scope.article;
     
     formated = '<p>' + formated + '</p>';
-    formated = formated.replace(/\n+/g, '</p><p>');
+    formated = formated.replace(/(\n\n)+/g, '</p><p>');
     
     formated = formated.replace(/\[b\]([\s\S]*?)\[\/b\]/g, '<strong>$1</strong>');
     formated = formated.replace(/\[i\]([\s\S]*?)\[\/i\]/g, '<em>$1</em>');
@@ -31,6 +31,10 @@ app.controller('FormatController', function ($scope, $sce) {
     formated = formated.replace(/\[color=([a-z]*?)\]([\s\S]*?)\[\/color\]/g, '<span style="color: $1;">$2</span>');
     formated = formated.replace(/\[color=(#[0-9a-fA-F]*?)\]([\s\S]*?)/g, '<span style="color: $1;">$2');
     formated = formated.replace(/\[\/color\]/g, '</span>');
+
+    formated = formated.replace(/\[olist\]([\s\S]*?)\[\/olist\]/g, '<ol>$1</ol>');
+    formated = formated.replace(/\[ulist\]([\s\S]*?)\[\/ulist\]/g, '<ul>$1</ul>');
+    formated = formated.replace(/\[li\]([\s\S]*?)\[\/li\]/g, '<li>$1</li>');
 
     formated = formated.replace(/\[font=(.+?)\]([\s\S]*?)\[\/font\]/g, '<span style="font-family: $1;">$2</span>');
     formated = formated.replace(/\[url\]([\s\S]*?)\[\/url\]/g, '<a href="$1">$1</a>');
@@ -92,6 +96,10 @@ app.controller('FormatController', function ($scope, $sce) {
     var end = '';
     if (tag !== 'hr')
       end = tag_type[0] +'/'+ tag +  tag_type[1];
+    if (tag === 'ulist' || tag === 'olist')
+      start = start + '\n';
+    if (tag === 'ulist' || tag === 'olist')
+      end = '\n' + end;
     var IE = /*@cc_on!@*/false;                   // this variable is false in all browsers, except IE
 
     if (IE) {
