@@ -17,6 +17,8 @@
 
     <!-- My app -->
     <script type="text/javascript" src="app.js"></script>
+    <!-- My query module -->
+    <script type="text/javascript" src="appQuery.js"></script>
 
     <!-- My CSS -->
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -291,6 +293,11 @@
           </div>
           <textarea id="editor" cols="160" rows="15" ng-model="article"></textarea>
         </div>
+      </div>
+
+      <div class="well" ng-controller="QueryController as qCtrl">
+        <input type="button" value="Get articles" ng-click="qCtrl.getArticles()" />
+        <div>{{articles.data}}</div>
       </div>
     </div>
 

@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngSanitize', 'colorpicker.module', 'ui.bootstrap']);
+var app = angular.module('app', ['ngSanitize', 'colorpicker.module', 'ui.bootstrap', 'queryModule']);
 
 app.controller('FormatController', function ($scope, $sce) {
   $scope.upicked = '1';
