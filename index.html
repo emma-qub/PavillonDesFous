@@ -93,7 +93,7 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    <div class="content" ng-controller="FormatController">
+    <div ng-show="false" class="content" ng-controller="FormatController">
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1" style="border: solid 2px grey;">
           <div ng-bind-html="format(article)"></div>
@@ -294,16 +294,24 @@
           <textarea id="editor" cols="160" rows="15" ng-model="article"></textarea>
         </div>
       </div>
+    </div>
 
-      <div class="well" ng-controller="QueryController as qCtrl">
-        <input type="button" value="Get articles" ng-click="qCtrl.getArticles()" />
-        <div>{{articles.data}}</div>
+
+    <div class="well" ng-controller="QueryController as qCtrl">
+      <input type="button" value="Get articles" ng-click="qCtrl.getArticles(indexArticle)" />
+      <input type="button" ng-show="indexArticle > 1" value="<<" ng-click="qCtrl.previousArticle()"> {{indexArticle}} <input type="button" ng-show="indexArticle < 208" value=">>" ng-click="qCtrl.nextArticle()">
+      <div ng-controller="FormatController">
+        <h1>{{articleTitle}}</h1>
+        <div class="col-lg-10 col-lg-offset-1" style="border: solid 2px grey;">
+          <div ng-bind-html="format(articleText)"></div>
+        </div>
       </div>
+
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="Bootstrap/js/bootstrap.min.js"></script>
+    <!-- <script src="Bootstrap/js/bootstrap.min.js"></script> -->
   </body>
 </html>

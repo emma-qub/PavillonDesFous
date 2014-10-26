@@ -41,6 +41,7 @@ app.controller('FormatController', function ($scope, $sce) {
     formated = formated.replace(/\[url=(.+?)\]([\s\S]*?)\[\/url\]/g, '<a href="$1">$2</a>');
 
     formated = formated.replace(/\[img\]([\s\S]*?)\[\/img\]/g, '<img class="img-rounded" src="$1" />');
+    formated = formated.replace(/\[img=?([\s\S]*?)\]/g, '<img class="img-rounded" src="$1" />');                                  /// Compat
     formated = formated.replace(/\[quote=?(.*?)\]([\s\S]*?)/g, '</p><div class="bs-callout bs-callout-info"><h4>Citation $1 :</h4><p>$2');
     formated = formated.replace(/\[\/quote\]/g, '</p></div><p>');
     formated = formated.replace(/\[abbr=?(.*?)\]([\s\S]*?)\[\/abbr\]/g, '<abbr title="$1">$2</abbr>');
@@ -49,11 +50,16 @@ app.controller('FormatController', function ($scope, $sce) {
     formated = formated.replace(/\[sup\]([\s\S]*?)\[\/sup\]/g, '<sup>$1</sup>');
 
     formated = formated.replace(/\[title=([1-6])\]([\s\S]*?)\[\/title\]/g, '<h$1>$2</h$1>');
+    formated = formated.replace(/\[t=([1-6])\]([\s\S]*?)\[\/t\]/g, function (match, p1, p2, offset, string) {var size = (parseInt(p1) * 5).toString(); return '<span style="font-size: '+size+'px;">'+p2+'</span>';});                                              /// Compat
 
     formated = formated.replace(/\[left\]([\s\S]*?)\[\/left\]/g, '<p class="text-left">$1</p>');
+    formated = formated.replace(/\[gauche\]([\s\S]*?)\[\/gauche\]/g, '<p class="text-left">$1</p>');                              /// Compat
     formated = formated.replace(/\[right\]([\s\S]*?)\[\/right\]/g, '<p class="text-right">$1</p>');
+    formated = formated.replace(/\[droite\]([\s\S]*?)\[\/droite\]/g, '<p class="text-right">$1</p>');                             /// Compat
     formated = formated.replace(/\[center\]([\s\S]*?)\[\/center\]/g, '<p class="text-center">$1</p>');
+    formated = formated.replace(/\[centrer\]([\s\S]*?)\[\/centrer\]/g, '<p class="text-center">$1</p>');                          /// Compat
     formated = formated.replace(/\[justify\]([\s\S]*?)\[\/justify\]/g, '<p class="text-justify">$1</p>');
+    formated = formated.replace(/\[justifier\]([\s\S]*?)\[\/justifier\]/g, '<p class="text-justify">$1</p>');                     /// Compat
 
     formated = formated.replace(/\[hr\]/g, '<hr>');
 

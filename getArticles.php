@@ -1,25 +1,24 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: text/html; charset=UTF-8");
+ header('content-type: application/json; charset=utf-8');
 
-if (!$conn = new mysqli("http://localhost:8000", "root", "hIMAWARI-CHAN", "pavillondesfous"))
-  echo "Cannot establish connection to MySQL.";
-else
-  echo "Succes!";
+$conn = new mysqli("localhost", "valentin", "Himawari-chan", "pavillondesfous");
 
-// $result = $conn->query("SELECT CompanyName, City, Country FROM Customers");
+$articleIndex = 1;
+if (isset($_GET["index"]))
+  $articleIndex = $_GET["index"];
+$result = $conn->query("SELECT titre, txt FROM article WHERE id = ".$articleIndex);
 
-// $outp = "[";
-// while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-//     if ($outp != "[") {$outp .= ",";}
-//     $outp .= '{"Name":"'  . $rs["CompanyName"] . '",';
-//     $outp .= '"City":"'   . $rs["City"]        . '",';
-//     $outp .= '"Country":"'. $rs["Country"]     . '"}';
-// }
-// $outp .="]";
+$outp = [];
+while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
+  $currArray = [];
+  $currArray["Title"] = $rs["titre"];
+  $currArray["Text"] = "<p>".str_replace("\n", "</p><p>", $rs["txt"])."</p>";
+
+  $outp[] = $currArray;
+}
 
 $conn->close();
 
-// echo($outp);
+echo json_encode($outp);
 
 ?>
