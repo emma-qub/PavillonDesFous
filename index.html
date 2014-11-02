@@ -93,7 +93,7 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    <div ng-show="false" class="content" ng-controller="FormatController">
+    <!-- <div ng-show="false" class="content" ng-controller="FormatController as formatCtrl">
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1" style="border: solid 2px grey;">
           <div ng-bind-html="format(article)"></div>
@@ -294,16 +294,17 @@
           <textarea id="editor" cols="160" rows="15" ng-model="article"></textarea>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
     <div class="well" ng-controller="QueryController as qCtrl">
       <input type="button" value="Get articles" ng-click="qCtrl.getArticles(indexArticle)" />
-      <input type="button" ng-show="indexArticle > 1" value="<<" ng-click="qCtrl.previousArticle()"> {{indexArticle}} <input type="button" ng-show="indexArticle < 208" value=">>" ng-click="qCtrl.nextArticle()">
-      <div ng-controller="FormatController">
+      <input type="button" ng-show="indexArticle > 1" value="<<" ng-click="qCtrl.previousArticle()"> <input type="number" ng-model="indexArticle"> <input type="button" ng-show="indexArticle < 208" value=">>" ng-click="qCtrl.nextArticle()">
+      <div>
         <h1>{{articleTitle}}</h1>
-        <div class="col-lg-10 col-lg-offset-1" style="border: solid 2px grey;">
-          <div ng-bind-html="format(articleText)"></div>
+        <div ng-controller="FormatController as formatCtrl" class="col-lg-10 col-lg-offset-1" style="border: solid 2px grey;">
+          <div ng-bind-html="format(articleText)" ng-click="qCtrl.nextArticle()"></div>
+          <!-- <div>{{format(articleText)}}</div> -->
         </div>
       </div>
 

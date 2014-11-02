@@ -16,10 +16,12 @@ app.controller('QueryController', function ($scope, $http) {
 
   this.nextArticle = function () {
     $scope.indexArticle += 1;
+    this.getArticles($scope.indexArticle);
   };
 
   this.previousArticle = function () {
     $scope.indexArticle -= 1;
+    this.getArticles($scope.indexArticle);
   };
 
 });

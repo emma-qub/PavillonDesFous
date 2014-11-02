@@ -19,7 +19,7 @@ app.controller('FormatController', function ($scope, $sce) {
   // $scope.article += '[quote=Leto II]Totoro est, selon Wikipedia :\n[quote=Wikipedia]Ce film a été diffusé pour la première fois en France lors du Festival du cinéma pour enfant de Corbeil-Essonnes en 19921.[/quote]\nC\'est mon film préféré.[/quote]';
 
   $scope.format = function (article) {
-    var formated = $scope.article;
+    var formated = article;
     
     formated = '<p>' + formated + '</p>';
     formated = formated.replace(/(\n\n)+/g, '</p><p>');
@@ -31,6 +31,9 @@ app.controller('FormatController', function ($scope, $sce) {
     formated = formated.replace(/\[color=([a-z]*?)\]([\s\S]*?)\[\/color\]/g, '<span style="color: $1;">$2</span>');
     formated = formated.replace(/\[color=(#[0-9a-fA-F]*?)\]([\s\S]*?)/g, '<span style="color: $1;">$2');
     formated = formated.replace(/\[\/color\]/g, '</span>');
+    formated = formated.replace(/\[c=([a-z]*?)\]([\s\S]*?)\[\/c\]/g, '<span style="color: $1;">$2</span>');                       /// Compat
+    formated = formated.replace(/\[c=(#[0-9a-fA-F]*?)\]([\s\S]*?)/g, '<span style="color: $1;">$2');                              /// Compat
+    formated = formated.replace(/\[\/c\]/g, '</span>');                                                                           /// Compat
 
     formated = formated.replace(/\[olist\]([\s\S]*?)\[\/olist\]/g, '<ol>$1</ol>');
     formated = formated.replace(/\[ulist\]([\s\S]*?)\[\/ulist\]/g, '<ul>$1</ul>');
